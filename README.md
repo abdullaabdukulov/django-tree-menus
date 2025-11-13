@@ -111,7 +111,7 @@ python manage.py runserver
 ```bash
 python manage.py loaddata apps/menus/fixtures/menu.json
 python manage.py loaddata apps/menus/fixtures/menu_items.json
-
+```
 ### 2. Использование в шаблонах
 
 ```django
