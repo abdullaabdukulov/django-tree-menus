@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  postgres:
+    build:
+      context: ./db_configs
+    container_name: ${PROJECT_NAME}-dev-postgres
+    restart: always
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - django_tree_menus_db:/var/lib/postgresql/data
+    ports:
+    - 4432:5432
+    networks:
+      - django_tree_menus
+
+  pgadmin:
+    container_name: ${PROJECT_NAME}-dev-pgadmin
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    env_file:
+      - ./.env
+    volumes:
+       - pgadmin:/var/lib/pgadmin
+    ports:
+      - 5000:80
+    depends_on:
+      - postgres
+    restart: always
+    networks:
+      - django_tree_menus
+
+networks:
+  django_tree_menus:
+    driver: bridge
+
+volumes:
+    django_tree_menus_db:
+    pgadmin:

@@ -1,0 +1,8 @@
+export PROJECT_NAME="Django Tree Menus"
+export DJANGO_SETTINGS_MODULE="config.settings.staging"
+export SECRET_KEY=
+export DB_NAME=
+export DB_HOST=
+export DB_PORT=
+export DB_USER=
+export DB_PASSWORD=

@@ -1,0 +1,64 @@
+name: Django Tree Menus deploy to staging
+
+on:
+  pull_request:
+    branches: ["staging"]
+    types: [closed]
+
+
+env:
+  DO_REPOSITORY: django_tree_menus                     # set this to your DigitalOcean repository name
+
+
+jobs:
+  deploy:
+    if: github.event.pull_request.merged
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Passing environments
+        uses: oNaiPs/secrets-to-env-action@v1
+        with:
+          secrets: ${{ toJSON(secrets) }}
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Build  Images (Staging)
+        id: build-image
+        run: |
+          doctl registry login
+          sudo apt-get install python3-pip
+          pip install dump-env
+          dump-env -p 'STAGE_' -p 'APP_' > .env
+          docker build -t ${{ secrets.IMAGE_NAME }}:${{ secrets.STAGE_IMAGE_TAG }} -f .deployments/staging/Dockerfile .
+          docker tag ${{ secrets.IMAGE_NAME }}:${{ secrets.STAGE_IMAGE_TAG }} ${{ secrets.DIGITALOCEAN_REGISTRY }}/${{ env.DO_REPOSITORY }}/${{ secrets.IMAGE_NAME }}:${{ secrets.STAGE_IMAGE_TAG }}
+          docker push ${{ secrets.DIGITALOCEAN_REGISTRY }}/${{ env.DO_REPOSITORY }}/${{ secrets.IMAGE_NAME }}:${{ secrets.STAGE_IMAGE_TAG }}
+          rm .env
+
+      - name: Deploy to Staging Server DigitalOcean
+        uses: fifsky/ssh-action@master
+        with:
+          command: |
+            doctl registry login
+            docker pull ${{ secrets.DIGITALOCEAN_REGISTRY }}/${{ env.DO_REPOSITORY }}/${{ secrets.IMAGE_NAME }}:${{ secrets.STAGE_IMAGE_TAG }}
+            docker service update --with-registry-auth --image ${{ secrets.DIGITALOCEAN_REGISTRY }}/${{ env.DO_REPOSITORY }}/${{ secrets.IMAGE_NAME }}:${{ secrets.STAGE_IMAGE_TAG }} ${{ secrets.CORE_SERVICE_NAME }}
+            docker service update --with-registry-auth --image ${{ secrets.DIGITALOCEAN_REGISTRY }}/${{ env.DO_REPOSITORY }}/${{ secrets.IMAGE_NAME }}:${{ secrets.STAGE_IMAGE_TAG }} ${{ secrets.CELERY_SERVICE_NAME }}
+            docker system prune -f
+          host: ${{ secrets.SSH_HOST_STAGE }}
+          args: -tt
+          user: ${{ secrets.SSH_USER_STAGE }}
+          key: ${{ secrets.SSH_PRIVATE_KEY_STAGE }}
+
+#       - name: Set up Python 3.11 Migrate
+#         uses: actions/setup-python@v2
+#         with:
+#           python-version: 3.11
+#           architecture: 'x64'
+#       - run:
+#           python manage.py migrate

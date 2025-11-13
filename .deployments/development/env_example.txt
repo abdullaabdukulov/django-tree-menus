@@ -1,0 +1,7 @@
+export PROJECT_NAME="Django Tree Menus"
+export SECRET_KEY=
+export DB_NAME=
+export DB_HOST=[ip address postgres container]
+export DB_PORT=5432
+export DB_USER=
+export DB_PASSWORD=

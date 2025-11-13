@@ -348,3 +348,15 @@ poetry.toml
 # LSP config files
 pyrightconfig.json
 
+
+.ruff_cache
+/docker-compose.yml
+/Dockerfile
+/entrypoint.sh
+/pg-Dockerfile
+/postgres-script.sh
+/run.sh
+/db_configs
+/nginx
+/proxy
+/test.json

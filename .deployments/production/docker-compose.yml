@@ -1,0 +1,58 @@
+version: '3.8'
+
+volumes:
+     django_tree_menus_media:
+     django_tree_menus_static:
+
+services:
+  app: &app
+    build:
+      context: .
+    container_name: ${PROJECT_NAME}-prod-app
+    restart: always
+    command: sh /code/run.sh app
+    volumes:
+      - .:/code
+       - django_tree_menus_media:/code/media
+       - django_tree_menus_static:/code/static
+    env_file:
+      - ./.env
+    # expose:
+    #   - 8000
+    ports:
+      - 8000:8000
+    networks:
+      - django_tree_menus
+
+  nginx:
+     build:
+       context: ./nginx
+     container_name: ${PROJECT_NAME}-prod-nginx
+     restart: always
+     volumes:
+       - ./deployments/nginx/nginx.conf:/etc/nginx/conf.d/:ro
+       - ./certbot/conf:/etc/letsencrypt/:ro
+       - ./certbot/www:/var/www/certbot/:ro
+       - django_tree_menus_media:/code/media
+       - django_tree_menus_static:/code/static
+     ports:
+       - 80:80
+       - 443:443
+     depends_on:
+       - app
+       - db
+     networks:
+       - django_tree_menus
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+     - ./certbot/conf:/etc/letsencrypt/:rw
+     - ./certbot/www/:/var/www/certbot/:rw
+    networks:
+     - django_tree_menus
+
+
+networks:
+  django_tree_menus:
+    driver: bridge
