@@ -1,0 +1,9 @@
+[
+{
+  "model": "menus.menu",
+  "pk": 1,
+  "fields": {
+    "name": "main_menu"
+  }
+}
+]

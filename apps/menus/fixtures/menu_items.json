@@ -1,0 +1,230 @@
+[
+{
+  "model": "menus.menuitem",
+  "pk": 1,
+  "fields": {
+    "menu": 1,
+    "title": "Главная",
+    "parent": null,
+    "url": "#",
+    "named_url": "",
+    "order": 1
+  }
+},
+{
+  "model": "menus.menuitem",
+  "pk": 2,
+  "fields": {
+    "menu": 1,
+    "title": "О компании",
+    "parent": null,
+    "url": "#",
+    "named_url": "",
+    "order": 2
+  }
+},
+{
+  "model": "menus.menuitem",
+  "pk": 3,
+  "fields": {
+    "menu": 1,
+    "title": "Услуги",
+    "parent": null,
+    "url": "#",
+    "named_url": "",
+    "order": 3
+  }
+},
+{
+  "model": "menus.menuitem",
+  "pk": 4,
+  "fields": {
+    "menu": 1,
+    "title": "Продукты",
+    "parent": null,
+    "url": "#",
+    "named_url": "",
+    "order": 4
+  }
+},
+{
+  "model": "menus.menuitem",
+  "pk": 5,
+  "fields": {
+    "menu": 1,
+    "title": "Контакты",
+    "parent": null,
+    "url": "#",
+    "named_url": "",
+    "order": 5
+  }
+},
+{
+  "model": "menus.menuitem",
+  "pk": 6,
+  "fields": {
+    "menu": 1,
+    "title": "История компании",
+    "parent": 2,
+    "url": "#",
+    "named_url": "",
+    "order": 1
+  }
+},
+{
+  "model": "menus.menuitem",
+  "pk": 7,
+  "fields": {
+    "menu": 1,
+    "title": "Наша команда",
+    "parent": 2,
+    "url": "#",
+    "named_url": "",
+    "order": 2
+  }
+},
+{
+  "model": "menus.menuitem",
+  "pk": 8,
+  "fields": {
+    "menu": 1,
+    "title": "Веб-разработка",
+    "parent": 3,
+    "url": "#",
+    "named_url": "",
+    "order": 1
+  }
+},
+{
+  "model": "menus.menuitem",
+  "pk": 9,
+  "fields": {
+    "menu": 1,
+    "title": "Маркетинг",
+    "parent": 3,
+    "url": "#",
+    "named_url": "",
+    "order": 2
+  }
+},
+{
+  "model": "menus.menuitem",
+  "pk": 10,
+  "fields": {
+    "menu": 1,
+    "title": "Программные решения",
+    "parent": 4,
+    "url": "#",
+    "named_url": "",
+    "order": 1
+  }
+},
+{
+  "model": "menus.menuitem",
+  "pk": 11,
+  "fields": {
+    "menu": 1,
+    "title": "Фронтенд",
+    "parent": 8,
+    "url": "#",
+    "named_url": "",
+    "order": 1
+  }
+},
+{
+  "model": "menus.menuitem",
+  "pk": 12,
+  "fields": {
+    "menu": 1,
+    "title": "Бэкенд",
+    "parent": 8,
+    "url": "#",
+    "named_url": "",
+    "order": 2
+  }
+},
+{
+  "model": "menus.menuitem",
+  "pk": 13,
+  "fields": {
+    "menu": 1,
+    "title": "SEO продвижение",
+    "parent": 9,
+    "url": "#",
+    "named_url": "",
+    "order": 1
+  }
+},
+{
+  "model": "menus.menuitem",
+  "pk": 14,
+  "fields": {
+    "menu": 1,
+    "title": "Брендинг",
+    "parent": 9,
+    "url": "#",
+    "named_url": "",
+    "order": 2
+  }
+},
+{
+  "model": "menus.menuitem",
+  "pk": 15,
+  "fields": {
+    "menu": 1,
+    "title": "ERP системы",
+    "parent": 10,
+    "url": "#",
+    "named_url": "",
+    "order": 1
+  }
+},
+{
+  "model": "menus.menuitem",
+  "pk": 16,
+  "fields": {
+    "menu": 1,
+    "title": "React проекты",
+    "parent": 11,
+    "url": "#",
+    "named_url": "",
+    "order": 1
+  }
+},
+{
+  "model": "menus.menuitem",
+  "pk": 17,
+  "fields": {
+    "menu": 1,
+    "title": "Django проекты",
+    "parent": 12,
+    "url": "#",
+    "named_url": "",
+    "order": 1
+  }
+},
+{
+  "model": "menus.menuitem",
+  "pk": 18,
+  "fields": {
+    "menu": 1,
+    "title": "Локальное SEO",
+    "parent": 13,
+    "url": "#",
+    "named_url": "",
+    "order": 1
+  }
+},
+{
+  "model": "menus.menuitem",
+  "pk": 19,
+  "fields": {
+    "menu": 1,
+    "title": "Облачные ERP решения",
+    "parent": 15,
+    "url": "#",
+    "named_url": "",
+    "order": 1
+  }
+}
+]
