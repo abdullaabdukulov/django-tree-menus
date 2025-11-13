@@ -18,14 +18,21 @@ Including another URLconf
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+from django.views.generic import TemplateView
 
 from config.settings import (
     base as settings,
     django_settings_module,
 )
 
+
+class HomeView(TemplateView):
+    template_name = "home.html"
+
+
 urlpatterns = [
     path("default-admin-panel/", admin.site.urls),
+    path("", HomeView.as_view(), name="home"),
 ]
 
 if django_settings_module == "development":
